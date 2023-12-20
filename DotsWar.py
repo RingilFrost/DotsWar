@@ -36,21 +36,6 @@ class DotsWar:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-# Puntos siguen mouse o toque de pantalla
-                elif (event.type == pygame.MOUSEMOTION) or (event.type == pygame.MOUSEBUTTONDOWN) :
-           # Si se toca la pantalla, ajustar las velocidades de las pelotas hacia la posición tocada
-                   target_position = pygame.mouse.get_pos()
-                   for dot in self.dots:
-                       dx = target_position[0] - dot.pos_x
-                       dy = target_position[1] - dot.pos_y
-                       angle = atan2(dy, dx)
-                       dot.speed_x = cos(angle) * 6
-                       dot.speed_y = sin(angle) * 6
-                elif (event.type == pygame.MOUSEBUTTONUP):
-                    for dot in self.dots:
-                       angle = random.randrange(360)
-                       dot.speed_x = cos(angle) * 3
-                       dot.speed_y = sin(angle) * 3
             self.screen.fill(self.colores["black"])
         
             # Mover y dibujar puntos
