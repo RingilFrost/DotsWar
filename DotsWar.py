@@ -11,7 +11,7 @@ class DotsWar:
         
         # Configuración de la pantalla
         self.width, self.height = 400, 600 #1080, 2185
-        self.screen = pygame.display.set_mode((self.width, self.height), pygame.SCALED)
+        self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Dots War")
         
         # Definir colores
