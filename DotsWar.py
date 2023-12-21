@@ -1,6 +1,5 @@
 import pygame
 import sys
-import random
 #from math import atan2, sin, cos
 from Dot import *
 
