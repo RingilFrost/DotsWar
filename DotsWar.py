@@ -10,8 +10,8 @@ class DotsWar:
         pygame.init()
         
         # Configuración de la pantalla
-        self.width, self.height = 400, 600 #1080, 2185
-        self.screen = pygame.display.set_mode((self.width, self.height))
+        self.width, self.height = 1080, 2185
+        self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
         pygame.display.set_caption("Dots War")
         
         # Definir colores
@@ -36,11 +36,21 @@ class DotsWar:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                # Este es el código que redimensiona la ventana
+                if event.type == pygame.VIDEORESIZE:
+                    # Recrea la ventana con el nuevo tamaño
+                    self.screen = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+                    self.width = event.w
+                    self.height = event.h
+                    for self.dot in self.dots:
+                        self.dot.update_screen_size(self.width, self.height)
+                    
             self.screen.fill(self.colores["black"])
         
             # Mover y dibujar puntos
             for i, self.dot in enumerate(self.dots):
                 self.dot.move(self.width, self.height)
+                
                 self.dot.draw(self.screen, self.colores["red"])
                 
                 # Verificar colisiones con otros puntos

@@ -10,8 +10,6 @@ class Dot:
         angle = random.randrange(360)
         self.speed_x = cos(angle) * 3
         self.speed_y = sin(angle) * 3
-        #self.speed_x = 3
-        #self.speed_y = 3
 
     def move(self, width, height):
         self.pos_x += self.speed_x
@@ -22,6 +20,11 @@ class Dot:
             self.speed_x = -self.speed_x
         if self.pos_y - self.radius <= 0 or self.pos_y + self.radius >= height:
             self.speed_y = -self.speed_y
+
+    def update_screen_size(self, width, height):
+        # Actualiza posición para evitar que los puntos estésn fuera de la pantalla después de la redimensión
+        self.pos_x = max(self.radius, min(self.pos_x, width - self.radius))
+        self.pos_y = max(self.radius, min(self.pos_y, height - self.radius))
 
     def check_collision(self, other_dot):
         dx = other_dot.pos_x - self.pos_x
@@ -45,6 +48,6 @@ class Dot:
 
             self.speed_x, self.speed_y = new_speed_other
             other_dot.speed_x, other_dot.speed_y = new_speed_self
-
+    
     def draw(self, screen, color):
         pygame.draw.circle(screen, color, (self.pos_x, self.pos_y), self.radius)
